@@ -8,7 +8,7 @@
         name: colors
         image: quay.io/acme_corp/eda-app:suncavanaugh
         state: started
-        network: bridge
+        network: host
         ports:
             - "{{ host_port }}:{{ container_port }}"
         env:
