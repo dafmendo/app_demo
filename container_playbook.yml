@@ -6,11 +6,18 @@
     - name: Create a color container
       containers.podman.podman_container:
         name: colors
-        image: docker.io/mmumshad/simple-webapp-color:latest
+        image: quay.io/acme_corp/eda-app:suncavanaugh
         state: started
-        network: host
+        recreate: true
+        network: bridge
         ports:
             - "{{ host_port }}:{{ container_port }}"
         env:
             APP_COLOR: "{{ color }}"
             tree: "{{ tree }}"
+            PUSHER: "{{ repo_pusher }}"
+            GITREF: "{{ repo_ref }}"
+            
+    - name: Print container
+      debug:
+        var: container
