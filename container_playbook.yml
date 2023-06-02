@@ -15,8 +15,6 @@
         env:
             APP_COLOR: "{{ color }}"
             tree: "{{ tree }}"
-            PUSHER: "{{ repo_pusher }}"
-            GITREF: "{{ repo_ref }}"
             
     - name: Print container
       debug:
