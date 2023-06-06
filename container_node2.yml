@@ -1,6 +1,6 @@
 ---
 - name: Playbook to setup prereqs
-  hosts: node2
+  hosts: all
   become: true
   tasks:
     - name: Create a color container
