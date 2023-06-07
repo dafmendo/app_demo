@@ -27,6 +27,8 @@
         env:
             APP_COLOR: "{{ color }}"
             tree: "{{ tree }}"
+      register: container
+      
     - name: Print container
       debug:
         var: container
