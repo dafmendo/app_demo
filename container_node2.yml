@@ -1,16 +1,32 @@
 ---
 - name: Playbook to setup prereqs
   hosts: all
+  gather_facts: false
   become: true
+  vars:
+    color: "green"
+    host_port: 8080
+    container_port: 8080
+    container_name: colors
+    
   tasks:
+    - name: Podman install
+      ansible.builtin.package:
+        name: podman
+        state: present
+        
     - name: Create a color container
       containers.podman.podman_container:
-        name: colors
-        image: docker.io/mmumshad/simple-webapp-color:latest
+        name: "{{ container_name }}"
+        image: quay.io/acme_corp/eda-app:suncavanaugh
         state: started
-        network: host
+        recreate: true
+        network: bridge
         ports:
             - "{{ host_port }}:{{ container_port }}"
         env:
             APP_COLOR: "{{ color }}"
             tree: "{{ tree }}"
+    - name: Print container
+      debug:
+        var: container
