@@ -16,8 +16,6 @@
     # if the incoming git event is that of a pull request,
     # set the name of the container to reflect a dev deployment
     container_name: "{{ 'colors' }}"
-    repo_pusher:    "{{ event.eauthor }}"
-    repo_ref:       "{{ event.eref }}"
     
   tasks:
     - name: Podman install
@@ -36,8 +34,6 @@
             - "{{ host_port }}:{{ container_port }}"
         env:
             APP_COLOR: "{{ color }}"
-            PUSHER: "{{ repo_pusher }}"
-            GITREF: "{{ repo_ref }}"
       register: container
 
     - name: Print container
